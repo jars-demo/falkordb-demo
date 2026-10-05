@@ -1,0 +1,9 @@
+{
+  "title": "Incident report",
+  "description": "A short, fictional security incident report. GraphRAG-SDK turns it into a graph, then answers questions from it.",
+  "questions": [
+    "Who led the response to the incident?",
+    "Which vulnerability did the attacker exploit, and on which servers?",
+    "Who did the head of security report the incident to?"
+  ]
+}

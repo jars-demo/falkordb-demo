@@ -1,0 +1,18 @@
+{
+  "title": "Social Network",
+  "description": "Six people, the companies they work at, the cities they live in, and who knows whom. The place to learn Cypher.",
+  "questions": [
+    {
+      "question": "Who works at Orbit Labs, and since when?",
+      "cypher": "MATCH (p:Person)-[w:WORKS_AT]->(c:Company {name: 'Orbit Labs'})\nRETURN p.name AS person, p.role AS role, w.since AS since\nORDER BY since"
+    },
+    {
+      "question": "Which people live in the same city but work at different companies?",
+      "cypher": "MATCH (a:Person)-[:LIVES_IN]->(city:City)<-[:LIVES_IN]-(b:Person),\n      (a)-[:WORKS_AT]->(ca:Company), (b)-[:WORKS_AT]->(cb:Company)\nWHERE a.name < b.name AND ca <> cb\nRETURN city.name AS city, a.name AS person_a, b.name AS person_b"
+    },
+    {
+      "question": "How is Dev connected to Fay? (shortest path through KNOWS)",
+      "cypher": "MATCH (a:Person {name: 'Dev'}), (b:Person {name: 'Fay'})\nWITH shortestPath((a)-[:KNOWS*]-(b)) AS p\nRETURN [n IN nodes(p) | n.name] AS path, length(p) AS hops"
+    }
+  ]
+}

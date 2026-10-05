@@ -1,0 +1,31 @@
+// Cyber attack paths: which assets an attacker could reach from the internet, and how.
+// Fictional network. Each statement ends with a semicolon.
+
+CREATE
+  (internet:Zone {name: 'Internet'}),
+  (web:Host {name: 'web-01', os: 'Linux', exposed: true, criticality: 'medium'}),
+  (vpn:Host {name: 'vpn-gw', os: 'Linux', exposed: true, criticality: 'high'}),
+  (app:Host {name: 'app-02', os: 'Linux', exposed: false, criticality: 'high'}),
+  (jump:Host {name: 'jump-box', os: 'Windows', exposed: false, criticality: 'high'}),
+  (hr:Host {name: 'hr-laptop-7', os: 'Windows', exposed: false, criticality: 'low'}),
+  (db:Host {name: 'customer-db', os: 'Linux', exposed: false, criticality: 'crown-jewel'}),
+  (log4:Vulnerability {cve: 'CVE-2021-44228', name: 'Log4Shell', severity: 9.8}),
+  (vpnbug:Vulnerability {cve: 'CVE-2023-46805', name: 'VPN auth bypass', severity: 8.2}),
+  (smb:Vulnerability {cve: 'CVE-2020-0796', name: 'SMBGhost', severity: 10.0}),
+  (svc:Account {name: 'svc-backup', privileged: true}),
+  (alice:Account {name: 'alice', privileged: false}),
+  (internet)-[:CAN_REACH {port: 443}]->(web),
+  (internet)-[:CAN_REACH {port: 443}]->(vpn),
+  (web)-[:CAN_REACH {port: 8080}]->(app),
+  (vpn)-[:CAN_REACH {port: 3389}]->(jump),
+  (vpn)-[:CAN_REACH {port: 445}]->(hr),
+  (app)-[:CAN_REACH {port: 5432}]->(db),
+  (jump)-[:CAN_REACH {port: 22}]->(db),
+  (web)-[:HAS_VULNERABILITY]->(log4),
+  (app)-[:HAS_VULNERABILITY]->(log4),
+  (vpn)-[:HAS_VULNERABILITY]->(vpnbug),
+  (hr)-[:HAS_VULNERABILITY]->(smb),
+  (svc)-[:HAS_SESSION_ON]->(jump),
+  (alice)-[:HAS_SESSION_ON]->(hr),
+  (svc)-[:ADMIN_OF]->(db),
+  (alice)-[:MEMBER_OF]->(:Group {name: 'HR'});

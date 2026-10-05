@@ -1,0 +1,18 @@
+{
+  "title": "Fraud Ring",
+  "description": "Bank customers who look unrelated in a table, but share a phone, a device and an address, and pass money in a circle.",
+  "questions": [
+    {
+      "question": "Which customers share a phone, device or address?",
+      "cypher": "MATCH (a:Customer)-[r]->(shared)<-[r2]-(b:Customer)\nWHERE a.name < b.name AND type(r) = type(r2)\nRETURN a.name AS customer_a, b.name AS customer_b, type(r) AS link, labels(shared)[0] AS shared"
+    },
+    {
+      "question": "Is there a circle of money transfers?",
+      "cypher": "MATCH p = (a:Account)-[:TRANSFERRED_TO*3..5]->(a)\nRETURN [n IN nodes(p) | n.number] AS cycle, reduce(total = 0, r IN relationships(p) | total + r.amount) AS total_moved\nLIMIT 1"
+    },
+    {
+      "question": "Which customers form one ring, linked through shared details?",
+      "cypher": "MATCH (start:Customer {name: 'R. Mehta'})-[:USES_PHONE|USES_DEVICE|LIVES_AT*1..6]-(other:Customer)\nWHERE other <> start\nRETURN DISTINCT start.name AS seed, other.name AS linked_customer"
+    }
+  ]
+}

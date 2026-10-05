@@ -1,0 +1,33 @@
+// Social network: people, the companies they work at, the cities they live in, who knows whom.
+// Fictional data. Each statement ends with a semicolon.
+
+CREATE
+  (ada:Person {name: 'Ada', age: 34, role: 'Engineer'}),
+  (ben:Person {name: 'Ben', age: 29, role: 'Designer'}),
+  (cara:Person {name: 'Cara', age: 41, role: 'Manager'}),
+  (dev:Person {name: 'Dev', age: 25, role: 'Engineer'}),
+  (eli:Person {name: 'Eli', age: 37, role: 'Analyst'}),
+  (fay:Person {name: 'Fay', age: 31, role: 'Engineer'}),
+  (orbit:Company {name: 'Orbit Labs', industry: 'Software'}),
+  (lumen:Company {name: 'Lumen Health', industry: 'Healthcare'}),
+  (pune:City {name: 'Pune'}),
+  (berlin:City {name: 'Berlin'}),
+  (ada)-[:WORKS_AT {since: 2019}]->(orbit),
+  (dev)-[:WORKS_AT {since: 2023}]->(orbit),
+  (cara)-[:WORKS_AT {since: 2015}]->(orbit),
+  (ben)-[:WORKS_AT {since: 2021}]->(lumen),
+  (eli)-[:WORKS_AT {since: 2018}]->(lumen),
+  (fay)-[:WORKS_AT {since: 2020}]->(lumen),
+  (ada)-[:LIVES_IN]->(pune),
+  (dev)-[:LIVES_IN]->(pune),
+  (ben)-[:LIVES_IN]->(pune),
+  (cara)-[:LIVES_IN]->(berlin),
+  (eli)-[:LIVES_IN]->(berlin),
+  (fay)-[:LIVES_IN]->(berlin),
+  (ada)-[:KNOWS]->(ben),
+  (ben)-[:KNOWS]->(eli),
+  (eli)-[:KNOWS]->(fay),
+  (cara)-[:KNOWS]->(ada),
+  (dev)-[:KNOWS]->(ada),
+  (cara)-[:MANAGES]->(ada),
+  (cara)-[:MANAGES]->(dev);

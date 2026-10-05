@@ -1,0 +1,18 @@
+{
+  "title": "Cyber Attack Paths",
+  "description": "A small company network: hosts, open ports, vulnerabilities and accounts. Find how an attacker could reach the customer database.",
+  "questions": [
+    {
+      "question": "Which internet-exposed hosts have a known vulnerability?",
+      "cypher": "MATCH (:Zone {name: 'Internet'})-[r:CAN_REACH]->(h:Host)-[:HAS_VULNERABILITY]->(v:Vulnerability)\nRETURN h.name AS host, r.port AS port, v.cve AS cve, v.name AS vulnerability, v.severity AS severity\nORDER BY severity DESC"
+    },
+    {
+      "question": "What is the shortest path from the internet to the customer database?",
+      "cypher": "MATCH (src:Zone {name: 'Internet'}), (dst:Host {name: 'customer-db'})\nWITH shortestPath((src)-[:CAN_REACH*]->(dst)) AS p\nRETURN [n IN nodes(p) | n.name] AS attack_path, length(p) AS hops"
+    },
+    {
+      "question": "Which paths to the customer database pass only through vulnerable hosts?",
+      "cypher": "MATCH p = (:Zone {name: 'Internet'})-[:CAN_REACH*]->(:Host {name: 'customer-db'})\nWHERE all(h IN nodes(p)[1..-1] WHERE (h)-[:HAS_VULNERABILITY]->())\nRETURN [n IN nodes(p) | n.name] AS attack_path, length(p) AS hops"
+    }
+  ]
+}
