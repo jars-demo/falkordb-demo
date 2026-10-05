@@ -1,0 +1,23 @@
+# Repo-wide ignores. Frontend-only rules live in app/frontend/.gitignore.
+
+# Secrets and local settings: .env is written by scripts/setup.py; only the example is shared
+.env
+.env.*
+!.env.example
+
+
+# Python (app/backend, scripts, tests)
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.ruff_cache/
+.coverage
+htmlcov/
+
+# Editors and OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+*.log

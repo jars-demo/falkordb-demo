@@ -1,0 +1,381 @@
+# Fully pinned dependencies for pip users. Generated from uv.lock, do not edit by hand.
+# Regenerate: uv export --format requirements-txt --no-hashes --no-dev --no-header --no-emit-project
+#             -o requirements.txt, then put back the --extra-index-url line below.
+# Install:    python -m venv .venv && .venv/bin/pip install -r requirements.txt  (Windows: .venv\Scripts\pip)
+
+# torch (needed by graphrag-sdk through gliner) comes from PyTorch's CPU-only index, so Linux
+# installs do not download gigabytes of CUDA libraries. Every other package comes from PyPI.
+--extra-index-url https://download.pytorch.org/whl/cpu
+
+aiohappyeyeballs==2.7.1
+    # via aiohttp
+aiohttp==3.14.3
+    # via litellm
+aiosignal==1.4.0
+    # via aiohttp
+annotated-doc==0.0.5
+    # via
+    #   fastapi
+    #   typer
+annotated-types==0.8.0
+    # via pydantic
+anyio==4.15.1
+    # via
+    #   httpx
+    #   openai
+    #   starlette
+    #   watchfiles
+async-timeout==5.0.1 ; python_full_version < '3.11.3'
+    # via
+    #   aiohttp
+    #   redis
+attrs==26.1.0
+    # via
+    #   aiohttp
+    #   jsonschema
+    #   referencing
+boto3==1.43.108
+    # via litellm
+botocore==1.43.108
+    # via
+    #   boto3
+    #   s3transfer
+certifi==2026.7.22
+    # via
+    #   httpcore
+    #   httpx
+    #   requests
+charset-normalizer==3.5.2
+    # via requests
+click==8.5.0
+    # via
+    #   huggingface-hub
+    #   litellm
+    #   uvicorn
+colorama==0.4.6 ; sys_platform == 'win32'
+    # via
+    #   loguru
+    #   tqdm
+    #   typer
+coloredlogs==15.0.1 ; python_full_version < '3.11'
+    # via onnxruntime
+distro==1.9.0
+    # via openai
+exceptiongroup==1.3.1 ; python_full_version < '3.11'
+    # via anyio
+falkordb==1.7.1
+    # via
+    #   falkordb-demo
+    #   graphrag-sdk
+fastapi==0.142.2
+    # via falkordb-demo
+fastembed==0.8.1
+    # via falkordb-demo
+fastuuid==0.14.0
+    # via litellm
+filelock==3.32.7
+    # via
+    #   huggingface-hub
+    #   litellm
+    #   torch
+flatbuffers==25.12.19
+    # via onnxruntime
+frozenlist==1.8.0
+    # via
+    #   aiohttp
+    #   aiosignal
+fsspec==2026.9.0
+    # via
+    #   huggingface-hub
+    #   torch
+gliner==0.2.29
+    # via graphrag-sdk
+graphrag-sdk==1.4.0
+    # via falkordb-demo
+h11==0.16.0
+    # via
+    #   httpcore
+    #   uvicorn
+h2==4.4.1
+    # via httpx
+hf-xet==1.6.0 ; platform_machine == 'AMD64' or platform_machine == 'aarch64' or platform_machine == 'amd64' or platform_machine == 'arm64' or platform_machine == 'x86_64'
+    # via huggingface-hub
+hnswlib==0.8.0
+    # via graphrag-sdk
+hpack==4.2.0
+    # via h2
+httpcore==1.0.9
+    # via httpx
+httptools==0.8.0
+    # via uvicorn
+httpx==0.28.1
+    # via
+    #   huggingface-hub
+    #   litellm
+    #   openai
+huggingface-hub==1.33.0
+    # via
+    #   fastembed
+    #   gliner
+    #   litellm
+    #   tokenizers
+    #   transformers
+humanfriendly==10.0 ; python_full_version < '3.11'
+    # via coloredlogs
+hyperframe==6.1.0
+    # via h2
+idna==3.20
+    # via
+    #   anyio
+    #   httpx
+    #   requests
+    #   yarl
+importlib-metadata==8.9.0
+    # via litellm
+jinja2==3.1.6
+    # via
+    #   litellm
+    #   torch
+jiter==0.17.0
+    # via openai
+jmespath==1.1.0
+    # via
+    #   boto3
+    #   botocore
+jsonschema==4.26.0
+    # via litellm
+jsonschema-specifications==2025.9.1
+    # via jsonschema
+litellm==1.104.0
+    # via graphrag-sdk
+loguru==0.7.3
+    # via fastembed
+markdown-it-py==4.2.0
+    # via rich
+markupsafe==3.0.4
+    # via jinja2
+mdurl==0.1.2
+    # via markdown-it-py
+mmh3==5.3.1
+    # via fastembed
+mpmath==1.3.0
+    # via sympy
+multidict==6.9.1
+    # via
+    #   aiohttp
+    #   yarl
+networkx==3.4.2 ; python_full_version < '3.11'
+    # via torch
+networkx==3.6.1 ; python_full_version == '3.11.*'
+    # via torch
+networkx==3.7 ; python_full_version >= '3.12'
+    # via torch
+numpy==2.2.6 ; python_full_version < '3.11'
+    # via
+    #   fastembed
+    #   gliner
+    #   graphrag-sdk
+    #   hnswlib
+    #   onnxruntime
+    #   scipy
+    #   transformers
+numpy==2.4.6 ; python_full_version == '3.11.*'
+    # via
+    #   fastembed
+    #   gliner
+    #   graphrag-sdk
+    #   hnswlib
+    #   onnxruntime
+    #   scipy
+    #   transformers
+numpy==2.5.3 ; python_full_version >= '3.12'
+    # via
+    #   fastembed
+    #   gliner
+    #   graphrag-sdk
+    #   hnswlib
+    #   onnxruntime
+    #   scipy
+    #   transformers
+onnxruntime==1.23.2 ; python_full_version < '3.11'
+    # via fastembed
+onnxruntime==1.30.0 ; python_full_version >= '3.11'
+    # via fastembed
+openai==2.54.0
+    # via litellm
+opentelemetry-api==1.45.0
+    # via fastapi
+packaging==26.3
+    # via
+    #   gliner
+    #   huggingface-hub
+    #   litellm
+    #   onnxruntime
+    #   transformers
+pillow==12.3.0
+    # via fastembed
+propcache==0.5.4
+    # via
+    #   aiohttp
+    #   yarl
+protobuf==7.36.2
+    # via onnxruntime
+py-rust-stemmers==0.1.8
+    # via fastembed
+pydantic==2.13.5
+    # via
+    #   fastapi
+    #   graphrag-sdk
+    #   litellm
+    #   openai
+    #   pydantic-settings
+pydantic-core==2.46.5
+    # via pydantic
+pydantic-settings==2.15.0
+    # via litellm
+pygments==2.21.0
+    # via rich
+pyreadline3==3.5.6 ; python_full_version < '3.11' and sys_platform == 'win32'
+    # via humanfriendly
+python-dateutil==2.9.0.post0
+    # via
+    #   botocore
+    #   falkordb
+python-dotenv==1.2.4
+    # via
+    #   falkordb-demo
+    #   graphrag-sdk
+    #   litellm
+    #   pydantic-settings
+    #   uvicorn
+pyyaml==6.0.3
+    # via
+    #   huggingface-hub
+    #   litellm
+    #   transformers
+    #   uvicorn
+redis==8.1.0
+    # via falkordb
+referencing==0.37.0
+    # via
+    #   jsonschema
+    #   jsonschema-specifications
+regex==2026.9.29
+    # via
+    #   tiktoken
+    #   transformers
+requests==2.34.2
+    # via
+    #   fastembed
+    #   tiktoken
+rich==15.0.0
+    # via typer
+rpds-py==0.30.0 ; python_full_version < '3.11'
+    # via
+    #   jsonschema
+    #   referencing
+rpds-py==2026.9.1 ; python_full_version >= '3.11'
+    # via
+    #   jsonschema
+    #   referencing
+s3transfer==0.19.2
+    # via boto3
+safetensors==0.8.0
+    # via
+    #   gliner
+    #   transformers
+scipy==1.15.3 ; python_full_version < '3.11'
+    # via graphrag-sdk
+scipy==1.17.1 ; python_full_version == '3.11.*'
+    # via graphrag-sdk
+scipy==1.18.1 ; python_full_version >= '3.12'
+    # via graphrag-sdk
+sentencepiece==0.2.2
+    # via gliner
+setuptools==84.0.0
+    # via torch
+shellingham==1.5.4
+    # via typer
+six==1.17.0
+    # via python-dateutil
+sniffio==1.3.1
+    # via openai
+starlette==1.7.0
+    # via fastapi
+sympy==1.14.0
+    # via
+    #   onnxruntime
+    #   torch
+tiktoken==0.14.0
+    # via
+    #   graphrag-sdk
+    #   litellm
+tokenizers==0.23.2
+    # via
+    #   fastembed
+    #   litellm
+    #   transformers
+tomli==2.4.1 ; python_full_version < '3.11'
+    # via huggingface-hub
+torch==2.14.1 ; sys_platform == 'darwin'
+    # via
+    #   falkordb-demo
+    #   gliner
+torch==2.14.1+cpu ; sys_platform != 'darwin'
+    # via
+    #   falkordb-demo
+    #   gliner
+tqdm==4.70.1
+    # via
+    #   fastembed
+    #   gliner
+    #   huggingface-hub
+    #   openai
+    #   transformers
+transformers==5.16.1
+    # via gliner
+typer==0.27.2
+    # via transformers
+typing-extensions==4.16.0
+    # via
+    #   aiohttp
+    #   aiosignal
+    #   anyio
+    #   exceptiongroup
+    #   fastapi
+    #   huggingface-hub
+    #   multidict
+    #   openai
+    #   opentelemetry-api
+    #   pydantic
+    #   pydantic-core
+    #   referencing
+    #   starlette
+    #   torch
+    #   typing-inspection
+    #   uvicorn
+typing-inspection==0.4.4
+    # via
+    #   fastapi
+    #   pydantic
+    #   pydantic-settings
+urllib3==2.8.0
+    # via
+    #   botocore
+    #   requests
+uvicorn==0.54.0
+    # via falkordb-demo
+uvloop==0.23.0 ; platform_python_implementation != 'PyPy' and sys_platform != 'cygwin' and sys_platform != 'win32'
+    # via uvicorn
+watchfiles==1.3.0
+    # via uvicorn
+websockets==16.1.1 ; python_full_version < '3.11'
+    # via uvicorn
+websockets==17.2 ; python_full_version >= '3.11'
+    # via uvicorn
+win32-setctime==1.2.0 ; sys_platform == 'win32'
+    # via loguru
+yarl==1.25.1
+    # via aiohttp
+zipp==4.1.1
+    # via importlib-metadata
