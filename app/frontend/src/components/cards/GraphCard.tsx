@@ -34,7 +34,7 @@ export function GraphCard({ state, highlight, dark }: { state: GraphState; highl
           selector: 'node',
           style: {
             'background-color': 'data(color)', 'border-width': 1.5, 'border-color': dark ? '#09090b' : '#ffffff',
-            label: 'data(label)', color: ink, 'font-size': 10, 'font-family': 'Geist, sans-serif',
+            label: 'data(label)', color: ink, 'font-size': 10, 'font-family': 'Inter, sans-serif',
             'text-valign': 'bottom', 'text-margin-y': 4, width: 20, height: 20,
           },
         },

@@ -1,52 +1,53 @@
 /*
  * falkordb-demo theme (imported by src/main.tsx).
- * Minimal and neutral: zinc greys, one indigo accent, hairline borders, Geist type.
+ * FalkorDB colours: violet accent, pink/orange gradient highlights, Space Grotesk headings.
  * Light is the default; [data-theme="dark"] on <html> switches to dark.
  */
 
 :root {
-  --bg: #fafafa;
+  --bg: #f8f7fc;
   --surface: #ffffff;
-  --subtle: #f4f4f5;
-  --border: #e4e4e7;
+  --subtle: #f2f0fa;
+  --border: #e6e3f1;
   --border-strong: #d4d4d8;
 
   --text: #18181b;
   --text-2: #52525b;
   --text-3: #a1a1aa;
 
-  --accent: #4f46e5;
-  --accent-soft: #eef2ff;
-  --ring: #4f46e540;
+  --accent: #6a5cf5;
+  --accent-soft: #efedff;
+  --ring: #7466ff40;
 
-  --primary: #18181b;
+  --primary: #6a5cf5;
   --primary-text: #ffffff;
   --positive: #16a34a;
   --negative: #dc2626;
   --warning: #d97706;
 
+  --gradient: linear-gradient(90deg, #7466ff, #ff66b3 55%, #ff804d);
   --radius: 8px;
   --radius-lg: 12px;
   --shadow: 0 1px 2px #18181b0d;
-  --font-sans: "Geist", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
-  --font-mono: "Geist Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
+  --font-sans: "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-mono: "JetBrains Mono", ui-monospace, SFMono-Regular, Menlo, monospace;
   color-scheme: light;
 }
 
 :root[data-theme="dark"] {
-  --bg: #09090b;
-  --surface: #111113;
-  --subtle: #18181b;
-  --border: #27272a;
+  --bg: #0b0a14;
+  --surface: #13121f;
+  --subtle: #1b1a2b;
+  --border: #2a2840;
   --border-strong: #3f3f46;
   --text: #fafafa;
   --text-2: #a1a1aa;
   --text-3: #71717a;
-  --accent: #818cf8;
-  --accent-soft: #1e1b4b;
+  --accent: #9d94ff;
+  --accent-soft: #221d4a;
   --ring: #818cf84d;
-  --primary: #fafafa;
-  --primary-text: #09090b;
+  --primary: #8a7fff;
+  --primary-text: #ffffff;
   --shadow: none;
   color-scheme: dark;
 }
@@ -62,7 +63,7 @@ body {
   -webkit-font-smoothing: antialiased;
 }
 
-h1, h2, h3, h4 { margin: 0; color: var(--text); font-weight: 600; letter-spacing: -0.015em; line-height: 1.2; }
+h1, h2, h3, h4 { margin: 0; color: var(--text); font-family: "Space Grotesk", var(--font-sans); font-weight: 600; letter-spacing: -0.015em; line-height: 1.2; }
 
 a { color: var(--accent); text-decoration: none; }
 a:hover { text-decoration: underline; text-underline-offset: 3px; }
@@ -916,3 +917,10 @@ textarea.cypher { min-height: 150px; font-size: 13px; line-height: 1.7; }
 
 .diagram-node { stroke: var(--surface); stroke-width: 3; }
 .diagram-node-label { font: 600 10.5px var(--font-mono); fill: #ffffff; }
+
+/* ---------- FalkorDB touches ---------- */
+.topbar { border-bottom: 0; box-shadow: none; }
+.topbar::after { content: ""; position: absolute; left: 0; right: 0; bottom: 0; height: 2px; background: var(--gradient); }
+.landing-hero h1, .page-header h1 { background: var(--gradient); -webkit-background-clip: text; background-clip: text; color: transparent; }
+.card { border-top: 3px solid var(--accent); }
+.btn.primary:hover { filter: brightness(1.08); }
