@@ -1,0 +1,67 @@
+# The whole stack:   docker compose up -d --build    then open http://localhost:3200
+#
+#   frontend  React app on nginx              http://localhost:3200
+#   backend   FastAPI (app/backend)           http://localhost:8200
+#   falkordb  FalkorDB database               localhost:6379
+#             FalkorDB's own browser UI       http://localhost:3201
+#
+# Developing? Keep FalkorDB in Docker and run the other two locally with hot reload:
+#   docker compose stop frontend backend
+#   uv run python -m app --reload            (backend on :8200, uses FALKORDB_* from .env)
+#   cd app/frontend && npm run dev           (frontend at http://localhost:5273)
+#
+# The ports differ from cognee-demo's (3000/8000/8001), so both workshops can run side by side.
+
+services:
+  falkordb:
+    image: falkordb/falkordb:6.0.1
+    ports:
+      - "6379:6379"
+      - "3201:3000"
+    volumes:
+      - falkordb_data:/var/lib/falkordb/data
+    healthcheck:
+      test: ["CMD", "redis-cli", "ping"]
+      interval: 5s
+      timeout: 5s
+      retries: 12
+    restart: unless-stopped
+
+  backend:
+    build:
+      context: .
+      dockerfile: app/backend/Dockerfile
+    ports:
+      - "8200:8000"
+    env_file:
+      - path: .env
+        required: false
+    environment:
+      # Inside Docker the backend always talks to the falkordb container.
+      FALKORDB_HOST: falkordb
+      FALKORDB_PORT: "6379"
+      FALKORDB_USERNAME: ""
+      FALKORDB_PASSWORD: ""
+      # The GraphRAG embedding model downloads here once and survives restarts.
+      FASTEMBED_CACHE_PATH: /srv/models
+    volumes:
+      - models:/srv/models
+      # Lets you run your use case without installing Python:
+      #   docker compose exec backend python usecases/<your-handle>/run.py
+      - ./usecases:/srv/usecases:ro
+    depends_on:
+      falkordb:
+        condition: service_healthy
+    restart: unless-stopped
+
+  frontend:
+    build: app/frontend
+    ports:
+      - "3200:80"
+    depends_on:
+      - backend
+    restart: unless-stopped
+
+volumes:
+  falkordb_data:
+  models:
