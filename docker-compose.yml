@@ -14,7 +14,8 @@
 
 services:
   falkordb:
-    image: falkordb/falkordb:6.0.1
+    # 4.x: GraphRAG-SDK 1.4.0 calls full-text index procedures that FalkorDB 6.0 changed.
+    image: falkordb/falkordb:v4.22.0
     ports:
       - "6379:6379"
       - "3201:3000"
@@ -42,8 +43,9 @@ services:
       FALKORDB_PORT: "6379"
       FALKORDB_USERNAME: ""
       FALKORDB_PASSWORD: ""
-      # The GraphRAG embedding model downloads here once and survives restarts.
-      FASTEMBED_CACHE_PATH: /srv/models
+      # GraphRAG's models (embeddings, entity recognition) download here once and survive restarts.
+      FASTEMBED_CACHE_PATH: /srv/models/fastembed
+      HF_HOME: /srv/models/huggingface
     volumes:
       - models:/srv/models
       # Lets you run your use case without installing Python:

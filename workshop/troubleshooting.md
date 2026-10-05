@@ -19,9 +19,12 @@ Write `shortestPath` after `WITH` or in `RETURN`, not inside `MATCH`:
 
 ```cypher
 MATCH (a:Person {name: 'Dev'}), (b:Person {name: 'Fay'})
-WITH shortestPath((a)-[:KNOWS*]-(b)) AS p
+WITH shortestPath((a)-[:KNOWS*]->(b)) AS p
 RETURN nodes(p)
 ```
+
+It also needs a direction (`->`); an undirected `-[:KNOWS*]-` fails with "does not currently
+support undirected shortestPath traversals".
 
 ## A query returns nothing
 

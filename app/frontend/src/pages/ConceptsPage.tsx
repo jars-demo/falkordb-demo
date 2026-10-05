@@ -48,7 +48,7 @@ RETURN city.name, a.name, b.name`,
   {
     id: 'paths',
     title: 'Paths and traversals',
-    body: 'Variable-length patterns such as -[:CAN_REACH*]-> follow any number of hops. shortestPath finds the shortest route between two nodes; in FalkorDB it goes in a WITH or RETURN clause, not inside MATCH.',
+    body: 'Variable-length patterns such as -[:CAN_REACH*]-> follow any number of hops. shortestPath finds the shortest route between two nodes; in FalkorDB it goes in a WITH or RETURN clause (not inside MATCH) and follows the arrows' direction.',
     code: `MATCH (src:Zone {name: 'Internet'}), (dst:Host {name: 'customer-db'})
 WITH shortestPath((src)-[:CAN_REACH*]->(dst)) AS p
 RETURN [n IN nodes(p) | n.name] AS attack_path`,

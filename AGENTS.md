@@ -12,7 +12,7 @@ contribute to. Attendees read the code as a reference, so prefer clear over clev
 ## Map
 
 ```text
-docker-compose.yml           falkordb/falkordb:6.0.1 + backend + frontend
+docker-compose.yml           falkordb/falkordb:v4.22.0 + backend + frontend
 .env.example                 all settings; scripts/setup.py writes .env
 pyproject.toml · uv.lock     Python deps (pinned); requirements.txt is the full pinned export
 
@@ -61,7 +61,8 @@ uv run python scripts/check_setup.py             # real FalkorDB, end to end
 1. **All FalkorDB calls go in `services/graph.py`.** Routes only validate and time.
 2. **Queries are read-only by default** (`ro_query`); writes need `allow_writes`.
 3. **Test every Cypher statement against a real FalkorDB** before committing it. FalkorDB differs
-   from other Cypher databases in places: `shortestPath` only works in `WITH` or `RETURN`, and
+   from other Cypher databases in places: `shortestPath` only works in `WITH` or `RETURN` and only
+   directed, pattern predicates inside `all()` fail (collect the nodes first, then use `IN`), and
    `sum()` returns floats (use `count(CASE … END)` for whole numbers).
 4. **The core workshop needs no key.** Only GraphRAG uses an LLM, and it fails with a clear 400
    when no key is set. Embeddings stay local (fastembed), because Groq has no embedding models.

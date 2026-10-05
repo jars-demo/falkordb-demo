@@ -12,7 +12,7 @@
     },
     {
       "question": "Which paths to the customer database pass only through vulnerable hosts?",
-      "cypher": "MATCH p = (:Zone {name: 'Internet'})-[:CAN_REACH*]->(:Host {name: 'customer-db'})\nWHERE all(h IN nodes(p)[1..-1] WHERE (h)-[:HAS_VULNERABILITY]->())\nRETURN [n IN nodes(p) | n.name] AS attack_path, length(p) AS hops"
+      "cypher": "MATCH (v:Host)-[:HAS_VULNERABILITY]->(:Vulnerability)\nWITH collect(DISTINCT v) AS vulnerable\nMATCH p = (:Zone {name: 'Internet'})-[:CAN_REACH*]->(:Host {name: 'customer-db'})\nWHERE all(h IN nodes(p)[1..-1] WHERE h IN vulnerable)\nRETURN [n IN nodes(p) | n.name] AS attack_path, length(p) AS hops"
     }
   ]
 }

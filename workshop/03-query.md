@@ -30,12 +30,12 @@ RETURN city.name AS city, a.name AS person_a, b.name AS person_b
 
 ## Paths
 
-`-[:KNOWS*]-` follows any number of hops. `shortestPath` finds the shortest route; in FalkorDB it
-goes in a `WITH` or `RETURN` clause:
+`-[:KNOWS*]->` follows any number of hops. `shortestPath` finds the shortest route; in FalkorDB it
+goes in a `WITH` or `RETURN` clause and follows the arrows' direction:
 
 ```cypher
 MATCH (a:Person {name: 'Dev'}), (b:Person {name: 'Fay'})
-WITH shortestPath((a)-[:KNOWS*]-(b)) AS p
+WITH shortestPath((a)-[:KNOWS*]->(b)) AS p
 RETURN [n IN nodes(p) | n.name] AS path, length(p) AS hops
 ```
 

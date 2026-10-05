@@ -142,17 +142,7 @@ cd app/frontend && npm run lint && npm run build
 ```
 
 Versions are pinned everywhere: `pyproject.toml` + `uv.lock` (and the full `requirements.txt`
-for pip), `app/frontend/package.json` + `package-lock.json`, and `falkordb/falkordb:6.0.1`.
-
-## Publish the landing site (Vercel)
-
-Vercel can host the **frontend only**. The static build (`npm run build:static`) keeps Home and
-Concepts and turns the Workshop page into "run it locally" instructions;
-[`app/frontend/vercel.json`](app/frontend/vercel.json) is set up for it.
-
-1. In Vercel, **Add New → Project** and import this repository.
-2. Set **Root Directory** to `app/frontend` and keep the other settings.
-3. Click **Deploy**. No environment variables are needed.
+for pip), `app/frontend/package.json` + `package-lock.json`, and `falkordb/falkordb:v4.22.0`.
 
 ## Contribute
 
