@@ -156,3 +156,8 @@ Add your use case (the workshop's final step) or improve the workshop: see
 [QueryWeaver](https://github.com/FalkorDB/QueryWeaver) · [Blog](https://www.falkordb.com/blog/)
 
 This is a community workshop built on FalkorDB, not an official FalkorDB project.
+
+## License
+
+[MIT](LICENSE) © 2026 Jishanahmed AR Shaikh. Third-party assets keep their own licenses; see
+[NOTICE.md](NOTICE.md).
